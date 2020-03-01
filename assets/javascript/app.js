@@ -118,6 +118,19 @@ var questions = [
                 document.getElementById("a20").innerHTML = "<input type=radio name=answers5 value=incorrect class=radio><label>" + a20; + "</label></input>";
         }
 
+
+        var timeLeft = 60;
+        var time = setInterval(timer, 1000);
+
+        function timer(){
+            document.getElementById("timer").innerHTML = timeLeft;
+            timeLeft--;
+            if (timeLeft === 0) {
+                clearInterval(time);
+                submitFunction();
+            }
+        }
+
         document.getElementById("button").innerHTML = "<button type=button id=submitButton>" + "Submit" + "</button>"
 }
 
