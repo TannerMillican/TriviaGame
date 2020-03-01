@@ -1,9 +1,9 @@
 window.onload=function() {
     $("#startButton").on("click", startFunction);
-    $("#submitButton").on("click", submitFunction);
 }
 
-
+var correct = 0;
+var incorrect = 0;
     
 var questions = [
     {
@@ -96,44 +96,56 @@ var questions = [
             var a19 = questions[4].answers.c;
             var a20 = questions[4].answers.d;
 
-            document.getElementById("a1").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a1; + "</label></input>"
-            document.getElementById("a2").innerHTML = "<input type=radio name=answer value=correct ><label>" + a2; + "</label></input>"
-            document.getElementById("a3").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a3; + "</label></input>"
-            document.getElementById("a4").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a4; + "</label></input>"
-            document.getElementById("a5").innerHTML = "<input type=radio name=answer value=incorect ><label>" + a5; + "</label></input>"
-            document.getElementById("a6").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a6; + "</label></input>"
-            document.getElementById("a7").innerHTML = "<input type=radio name=answer value=correct ><label>" + a7; + "</label></input>"
-            document.getElementById("a8").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a8; + "</label></input>"
-            document.getElementById("a9").innerHTML = "<input type=radio name=answer value=correct ><label>" + a9; + "</label></input>"
-            document.getElementById("a10").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a10; + "</label></input>"
-            document.getElementById("a11").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a11; + "</label></input>"
-            document.getElementById("a12").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a12; + "</label></input>"
-            document.getElementById("a13").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a13; + "</label></input>"
-            document.getElementById("a14").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a14; + "</label></input>"
-            document.getElementById("a15").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a15; + "</label></input>"
-            document.getElementById("a16").innerHTML = "<input type=radio name=answer value=correct ><label>" + a16; + "</label></input>"
-            document.getElementById("a17").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a17; + "</label></input>"
-            document.getElementById("a18").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a18; + "</label></input>"
-            document.getElementById("a19").innerHTML = "<input type=radio name=answer value=correct ><label>" + a19; + "</label></input>"
-            document.getElementById("a20").innerHTML = "<input type=radio name=answer value=incorrect ><label>" + a20; + "</label></input>"
+                document.getElementById("a1").innerHTML = "<input type=radio name=answers1 value=incorrect class=radio><label>" + a1; + "</label></input>";
+                document.getElementById("a2").innerHTML = "<input type=radio name=answers1 value=correct class=radio><label>" + a2; + "</label></input>";
+                document.getElementById("a3").innerHTML = "<input type=radio name=answers1 value=incorrect class=radio><label>" + a3; + "</label></input>";
+                document.getElementById("a4").innerHTML = "<input type=radio name=answers1 value=incorrect class=radio><label>" + a4; + "</label></input>";
+                document.getElementById("a5").innerHTML = "<input type=radio name=answers2 value=incorect class=radio><label>" + a5; + "</label></input>";
+                document.getElementById("a6").innerHTML = "<input type=radio name=answers2 value=incorrect class=radio><label>" + a6; + "</label></input>";
+                document.getElementById("a7").innerHTML = "<input type=radio name=answers2 value=correct class=radio><label>" + a7; + "</label></input>";
+                document.getElementById("a8").innerHTML = "<input type=radio name=answers2 value=incorrect class=radio><label>" + a8; + "</label></input>";
+                document.getElementById("a9").innerHTML = "<input type=radio name=answers3 value=correct class=radio><label>" + a9; + "</label></input>";
+                document.getElementById("a10").innerHTML = "<input type=radio name=answers3 value=incorrect class=radio><label>" + a10; + "</label></input>";
+                document.getElementById("a11").innerHTML = "<input type=radio name=answers3 value=incorrect class=radio><label>" + a11; + "</label></input>";
+                document.getElementById("a12").innerHTML = "<input type=radio name=answers3 value=incorrect class=radio><label>" + a12; + "</label></input>";
+                document.getElementById("a13").innerHTML = "<input type=radio name=answers4 value=incorrect class=radio><label>" + a13; + "</label></input>";
+                document.getElementById("a14").innerHTML = "<input type=radio name=answers4 value=incorrect class=radio><label>" + a14; + "</label></input>";
+                document.getElementById("a15").innerHTML = "<input type=radio name=answers4 value=incorrect class=radio><label>" + a15; + "</label></input>";
+                document.getElementById("a16").innerHTML = "<input type=radio name=answers4 value=correct class=radio><label>" + a16; + "</label></input>";
+                document.getElementById("a17").innerHTML = "<input type=radio name=answers5 value=incorrect class=radio><label>" + a17; + "</label></input>";
+                document.getElementById("a18").innerHTML = "<input type=radio name=answers5 value=incorrect class=radio><label>" + a18; + "</label></input>";
+                document.getElementById("a19").innerHTML = "<input type=radio name=answers5 value=correct class=radio><label>" + a19; + "</label></input>";
+                document.getElementById("a20").innerHTML = "<input type=radio name=answers5 value=incorrect class=radio><label>" + a20; + "</label></input>";
         }
 
-        document.getElementById("submit").innerHTML = "<button type=button id=submitButton>" + "Submit" + "</button"
+        document.getElementById("button").innerHTML = "<button type=button id=submitButton>" + "Submit" + "</button>"
 }
 
+$(document).on("click", "#submitButton", submitFunction)
+
     function submitFunction(){
-        getButtonValues();
-        var correct = 0;
-        var incorect = 0;
 
-        function getButtonValues(){
-            var button = document.getElementsByName('answer');
+        var answers = [];
 
-            for(var i = 0; button.length; i++) {
-                if(button[i].checked) {
-                    return button[i].value
-                }
+
+            var answer1 = $("input[type='radio'][name='answers1']:checked").val();
+            var answer2 = $("input[type='radio'][name='answers2']:checked").val();
+            var answer3 = $("input[type='radio'][name='answers3']:checked").val();
+            var answer4 = $("input[type='radio'][name='answers4']:checked").val();
+            var answer5 = $("input[type='radio'][name='answers5']:checked").val();
+            answers.push(answer1, answer2, answer3, answer4, answer5)
+            console.log(answers);
+        
+
+            for (var i = 0; i < answers.length; i++) {
+                var answer = answers[i];
                 
+                if(answer === "correct"){
+                    correct++;
+                    $("#correct").text(correct);
+                } else if(answer === "incorrect" || "") {
+                    incorrect++;
+                    $("#incorrect").text(incorrect);
+                }
             }
-        }
     }
